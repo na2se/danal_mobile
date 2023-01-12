@@ -447,47 +447,57 @@
       </div>
     </footer>
     <script>
-      //console.log(window);
-      //window.alert("아이디가 맞지 않습니다.");
-      //dom  (document object model);
-
-      //f(x) = x+5;
-
-      function plus5() {
-        console.log(x + 5);
-      }
-      function bank(money) {
-        console.log(money * 1.045);
-      }
+      const btnAll = document.querySelector(".btn--all");
       const header = document.querySelector(".header");
       const gnb = document.querySelector(".gnb");
+      // 찾아서 이벤트 걸고 제어하면됨
+      const depth01 = document.querySelectorAll(".gnb .gnb__list > li > a");
+      console.log("🚀 ~ file: index.html:455 ~ depth01", depth01);
+      const depth02 = document.querySelectorAll(
+        ".gnb .gnb__list > li > .gnb__list--sub"
+      );
+      const total = depth01.length;
+      for (let i = 0; i < total; i++) {
+        depth01[i].addEventListener("click", function (e) {
+          e.preventDefault();
+          // a태그 이벤트막는법 prevent는 위에 써야함
+          for (let j = 0; j < total; j++) {
+            if (i !== j) {
+              depth02[j].classList.remove("on");
+            }
+          }
+          depth02[i].classList.toggle("on");
+        });
+      }
 
-      gnb.addEventListener("mouseenter", function () {
-        header.classList.add("on");
-      });
-      gnb.addEventListener("mouseleave", function () {
-        header.classList.remove("on");
-      });
+      btnAll.addEventListener("click", function () {
+        console.log("clock햇음");
 
-      const swiper = new Swiper(".platform-swiper", {
-        slidesPerView: "auto",
-        spaceBetween: 50,
-        loop: true,
-        navigation: {
-          nextEl: ".platform-swiper .btn--next",
-          prevEl: ".platform-swiper .btn--prev",
-        },
-      });
-
-      window.addEventListener("scroll", function () {
-        //throttle, debounce
-        console.log(window.scrollY);
-        if (window.scrollY > 0) {
-          header.classList.add("scroll");
+        const isContains = header.classList.contains("on");
+        if (isContains) {
+          header.classList.remove("on");
+          setTimeout(function () {
+            for (let i = 0; i < total; i++) {
+              depth02[i].classList.remove("on");
+            }
+          }, 250);
         } else {
-          header.classList.remove("scroll");
+          header.classList.add("on");
         }
+        // header.classList.toggle("on");
       });
+      // depth01.addEventListener("click", function (e) {
+      //   e.preventDefault();
+      //   // a태그 이벤트막는법 prevent는 위에 써야함
+      //   depth02.classList.toggle("on");
+
+      //   console.log(e);
+      //   console.log("a를 클릭");
+      //   // return false;
+      // });
+      // depth02.addEventListener("click", function (e) {
+      //   depth01.classList.toggle("on");
+      // });
     </script>
   </body>
 </html>
