@@ -406,7 +406,7 @@
       </section>
       <!-- partner end -->
     </main>
-    <footer class="footer">
+    <footer class="footer section">
       <div class="container">
         <div class="upper">
           <span class="logo">
@@ -498,6 +498,16 @@
       // depth02.addEventListener("click", function (e) {
       //   depth01.classList.toggle("on");
       // });
+      new Swiper(".platform-swiper", {
+        slidesPerView: "auto",
+        loop: true,
+        spaceBetween: 20,
+        centeredSlides: true,
+        pagination: {
+          el: ".swiper-pagination",
+          type: "bullets",
+        },
+      });
     </script>
   </body>
 </html>
